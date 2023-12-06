@@ -10,7 +10,7 @@ app.use(express.static(__dirname + "/public"));
 //     res.send(`hello world ${req.query.username}`)
 // })
 app.get('/:username', function (req, res) {
-    console.log(req.params);
+    // console.log();
     res.send(`hello `)
 })
 
