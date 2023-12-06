@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
+
+let users = require('./users');
+// console.log(users);
+
 global.config = require('./config');
 
 app.use(express.static(__dirname + "/public"));
@@ -9,9 +13,25 @@ app.use(express.static(__dirname + "/public"));
 //     console.log(req.query);
 //     res.send(`hello world ${req.query.username}`)
 // })
-app.get('/:username', function (req, res) {
-    // console.log();
-    res.send(`hello `)
+
+
+app.get('/', function (req, res) {
+    res.status(200).json({
+        data: users,
+        success: true,
+    });
+})
+
+app.get('/:id', function (req, res) {
+    let user = users.find((user) => {
+        if (user.id === Number(req.params.id)) {
+            return user;
+        }
+    })
+    res.status(200).json({
+        data: user,
+        success: true,
+    });
 })
 
 
