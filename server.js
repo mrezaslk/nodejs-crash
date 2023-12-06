@@ -8,6 +8,9 @@ let users = require('./users');
 global.config = require('./config');
 
 app.use(express.static(__dirname + "/public"));
+app.use(express.urlencoded({
+    extended: false
+}))
 
 // app.get('/', function (req, res) {
 //     console.log(req.query);
@@ -32,6 +35,15 @@ app.get('/:id', function (req, res) {
         data: user,
         success: true,
     });
+})
+
+app.post('/', function (req, res) {
+    // console.log(req.body);
+    req.body.id = parseInt(req.body.id);
+    users.push(req.body);
+    res.json({
+        data: 'user is add successfully'
+    })
 })
 
 
