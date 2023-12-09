@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const { check, validationResult } = require('express-validator');
+
 
 let users = require('./users');
 // console.log(users);
@@ -37,8 +39,14 @@ app.get('/:id', function (req, res) {
     });
 })
 
-app.post('/', function (req, res) {
-    // console.log(req.body);
+app.post('/', [
+    check('email', 'email is not correct').isEmail(),
+    check('password', 'password length is wrong').isLength({ min: 5 })
+], function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
     req.body.id = parseInt(req.body.id);
     users.push(req.body);
     res.json({
