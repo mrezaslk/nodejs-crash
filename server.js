@@ -54,6 +54,19 @@ app.post('/', [
     })
 })
 
+app.put('/:id', (req, res) => {
+    users = users.map((user) => {
+        if (user.id == req.params.id) {
+            return req.body;
+        } else {
+            return user;
+        }
+    })
+    res.json({
+        data: 'user is update successfully'
+    })
+})
+
 
 
 app.listen(config.port, () => {
