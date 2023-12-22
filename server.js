@@ -8,7 +8,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-app.use('/', require('./routes/user'));
+app.use('/user', require('./routes/user'));
 
 
 
