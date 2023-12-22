@@ -67,6 +67,17 @@ app.put('/:id', (req, res) => {
     })
 })
 
+app.delete('/:id', (req, res) => {
+    users = users.filter((user) => {
+        if (user.id != req.params.id) {
+            return user;
+        }
+    })
+    res.json({
+        data: 'user is delete successfully'
+    })
+})
+
 
 
 app.listen(config.port, () => {
