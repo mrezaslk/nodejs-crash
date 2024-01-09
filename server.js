@@ -8,6 +8,19 @@ app.use(express.urlencoded({
     extended: false
 }))
 
+// Middleware
+// app.use((req, res, next) => {
+//     console.log('middleware1');
+//     next();
+// })
+
+app.get('/', (req, res) => {
+    console.log('yes ');
+    res.send('home')
+})
+
+
+
 app.use('/user', require('./routes/user'));
 
 
