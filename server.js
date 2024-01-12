@@ -7,6 +7,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({
     extended: false
 }))
+app.set('view engine', 'ejs');
 
 // Middleware
 // app.use((req, res, next) => {
@@ -16,7 +17,8 @@ app.use(express.urlencoded({
 
 app.get('/', (req, res) => {
     console.log('yes ');
-    res.send('home')
+    res.render('index')
+    // res.send('home')
 })
 
 
