@@ -6,6 +6,5 @@ function log(message) {
 }
 
 module.exports = {
-    log: log,
-    // endpoint: url
+    log
 }

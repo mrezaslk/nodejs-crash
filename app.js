@@ -1,3 +1,3 @@
 const loggerModule = require('./logger');
-loggerModule.log('message')
+loggerModule.log('message');
 console.log(loggerModule);
