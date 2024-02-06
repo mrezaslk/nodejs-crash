@@ -1,6 +1,7 @@
-// const loggerModule = require('./logger');
-// loggerModule.log('message');
-// console.log(loggerModule);
-const pathModule = require('path');
+const os = require('os');
 
-console.log("pathModule", pathModule.parse(__filename));
+let totalMemory = os.totalmem()
+let freeMemory = os.freemem()
+
+console.log(`totalMemory ${totalMemory}`);
+console.log("freeMemory " + freeMemory);
