@@ -1,20 +1,10 @@
-// const os = require('os');
+const EvenEmitter = require('events');
 
-// let totalMemory = os.totalmem()
-// let freeMemory = os.freemem()
+const emitter = new EvenEmitter();
 
-// console.log(`totalMemory ${totalMemory}`);
-// console.log("freeMemory " + freeMemory);
-
-
-
-const fs = require('fs');
-
-// const files = fs.readdirSync('./');
-
-// console.log("files", files);
-
-const filesAsync = fs.readdir('./', function (err, files) {
-    if (err) console.log("err", err);
-    else console.log("Result", files);
+// Register a listener
+emitter.on("messageLogged", function () {
+    console.log('Listener called');
 })
+//Raise an event 
+emitter.emit('messageLogged')
