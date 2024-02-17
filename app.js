@@ -1,4 +1,4 @@
-const EvenEmitter = require('events');
+// const EvenEmitter = require('events');
 
 const Logger = require('./logger')
 const logger = new Logger();

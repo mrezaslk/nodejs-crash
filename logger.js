@@ -1,6 +1,6 @@
 const EvenEmitter = require('events');
 
-var url = 'http://mylogger.io/log';
+// var url = 'http://mylogger.io/log';
 
 
 class Logger extends EvenEmitter {
