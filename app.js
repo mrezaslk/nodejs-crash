@@ -1,11 +1,17 @@
-// const EvenEmitter = require('events');
+const http = require('http');
 
-const Logger = require('./logger')
-const logger = new Logger();
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.write('Hello worl')
+        res.end();
+    }
+});
 
-// Register a listener
-logger.on("messageLogged", (arg) => {
-    console.log('listener called', arg);
-})
-logger.log('message')
 
+// server.on('connection', (socket) => {
+//     console.log('New Conection ...')
+// })
+
+server.listen(3000);
+
+console.log('Listening on port 3000...');
