@@ -1,6 +1,8 @@
 const express = require('express');
-
 const app = express();
+
+app.use(express.json());
+
 
 const courses = [
     {
@@ -23,7 +25,6 @@ app.get('/api/courses', (req, res) => {
     // res.send([1, 2, 3]);
 })
 
-
 app.get('/api/courses/:id', (req, res) => {
 
     const course = courses.find((c => c.id === parseInt(req.params.id)))
@@ -31,6 +32,8 @@ app.get('/api/courses/:id', (req, res) => {
     res.send(course)
     // res.send(req.params.id);
 })
+
+
 app.get('/api/posts/:year/:month', (req, res) => {
     // res.send(req.params)
     res.send(req.query);
@@ -39,6 +42,19 @@ app.get('/api/posts/:year/:month', (req, res) => {
 //     // res.send(req.params)
 //     res.send(req.query);
 // })
+
+
+app.post('/api/courses', (req, res) => {
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name
+    }
+    courses.push(course);
+    res.send(course);
+
+})
+
+
 
 // PORT
 const port = process.env.PORT || 3000
