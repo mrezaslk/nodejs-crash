@@ -2,21 +2,43 @@ const express = require('express');
 
 const app = express();
 
+const courses = [
+    {
+        id: 1, name: "courses1"
+    },
+    {
+        id: 2, name: "courses2"
+    },
+    {
+        id: 3, name: "courses3"
+    },
+]
+
 app.get('/', (req, res) => {
     res.send('Hello world');
 })
 
 app.get('/api/courses', (req, res) => {
-    res.send([1, 2, 3]);
+    res.send(courses)
+    // res.send([1, 2, 3]);
 })
 
 
 app.get('/api/courses/:id', (req, res) => {
-    res.send(req.params.id);
+
+    const course = courses.find((c => c.id === parseInt(req.params.id)))
+    if (!course) res.status(404).send('The course was not found')
+    res.send(course)
+    // res.send(req.params.id);
 })
 app.get('/api/posts/:year/:month', (req, res) => {
+    // res.send(req.params)
     res.send(req.query);
 })
+// app.get('/api/posts/:year/:month', (req, res) => {
+//     // res.send(req.params)
+//     res.send(req.query);
+// })
 
 // PORT
 const port = process.env.PORT || 3000
