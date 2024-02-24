@@ -30,7 +30,7 @@ app.get('/api/courses', (req, res) => {
 app.get('/api/courses/:id', (req, res) => {
 
     const course = courses.find((c => c.id === parseInt(req.params.id)))
-    if (!course) res.status(404).send('The course was not found')
+    if (!course) return res.status(404).send('The course was not found')
     res.send(course)
     // res.send(req.params.id);
 })
@@ -48,14 +48,14 @@ app.get('/api/posts/:year/:month', (req, res) => {
 app.put('/api/courses/:id', (req, res) => {
     // Look up the course
     const course = courses.find((c => c.id === parseInt(req.params.id)))
-    if (!course) res.status(404).send('The course was not found')
-
+    if (!course) {
+        return res.status(404).send('The course was not found')
+    }
     // Validate
     const result = validateCourse(req.body)
     const { error } = validateCourse(req.body)
     if (error) {
-        res.status(400).send(result.error.details[0].message)
-        return;
+        return res.status(400).send(result.error.details[0].message)
     }
     // Update course
     course.name = req.body.name
@@ -83,7 +83,13 @@ app.post('/api/courses', (req, res) => {
 })
 
 
-
+app.delete('/api/courses/:id', (req, res) => {
+    const course = courses.find((c => c.id === parseInt(req.params.id)))
+    if (!course) return res.status(404).send('The course was not found')
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+    res.send(course)
+})
 
 
 
