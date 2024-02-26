@@ -1,17 +1,31 @@
-const EvenEmitter = require('events');
+// const EvenEmitter = require('events');
 
-// var url = 'http://mylogger.io/log';
+// // var url = 'http://mylogger.io/log';
 
 
-class Logger extends EvenEmitter {
-    log(message) {
-        // send http req
-        console.log(message);
+// class Logger extends EvenEmitter {
+//     log(message) {
+//         // send http req
+//         console.log(message);
 
-        //Raise an event 
-        this.emit('messageLogged', { id: 1, url: 'http:///' })
-    }
+//         //Raise an event 
+//         this.emit('messageLogged', { id: 1, url: 'http:///' })
+//     }
+// }
+
+
+// module.exports = Logger
+
+
+
+
+
+
+// Add Middleware Function
+
+function log(req, res, next) {
+    console.log("Logging .... ");
+    next();
 }
 
-
-module.exports = Logger
+module.exports = log;
