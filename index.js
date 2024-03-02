@@ -10,6 +10,8 @@ app.use(express.static('public'));
 
 app.use(logger)
 
+
+// Add midleware fucntion
 app.use(function (req, res, next) {
     console.log("Authenticated .... ");
     next();
