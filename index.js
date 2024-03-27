@@ -1,14 +1,23 @@
 const Joi = require('joi');
-
+const helmet = require('helmet');
+const morgan = require('morgan');
 const logger = require('./logger')
 const express = require('express');
 const app = express();
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use(logger)
+app.use(helmet());
+
+if (app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    console.log('Morgan enabled ...');
+}
 
 
 // Add midleware fucntion
@@ -39,7 +48,6 @@ app.get('/api/courses', (req, res) => {
 })
 
 app.get('/api/courses/:id', (req, res) => {
-
     const course = courses.find((c => c.id === parseInt(req.params.id)))
     if (!course) return res.status(404).send('The course was not found')
     res.send(course)
