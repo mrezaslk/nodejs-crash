@@ -18,6 +18,10 @@ app.use(express.static('public'));
 app.use(logger)
 app.use(helmet());
 
+
+app.set('view engine', 'pug')
+app.set('views', './views') // default
+
 // Configuration
 console.log("Aplication Name: " + config.get('name'));
 // console.log("Mail server : " + config.get('mail.host'));
@@ -51,7 +55,11 @@ const courses = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('Hello world');
+    res.render('index', {
+        title: "My express app",
+        message: "Hello"
+    })
+    // res.send('Hello world');
 })
 
 app.get('/api/courses', (req, res) => {
