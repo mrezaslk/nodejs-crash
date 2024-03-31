@@ -1,3 +1,6 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
+
 const Joi = require('joi');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -17,15 +20,17 @@ app.use(helmet());
 
 // Configuration
 console.log("Aplication Name: " + config.get('name'));
-console.log("Mail server : " + config.get('mail.host'));
-console.log("Mail Password : " + config.get('mail.password'));
+// console.log("Mail server : " + config.get('mail.host'));
+// console.log("Mail Password : " + config.get('mail.password'));
 
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    // console.log('Morgan enabled ...');
+    startupDebugger('Morgan enabled ...');
 }
 
+// Db work ...
+dbDebugger('Connected to the database ...')
 
 // Add midleware fucntion
 app.use(function (req, res, next) {
