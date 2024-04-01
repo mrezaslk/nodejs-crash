@@ -1,6 +1,6 @@
 // const EvenEmitter = require('events');
 
-const Logger = require('./logger')
+const Logger = require('./middleware/logger')
 const logger = new Logger();
 
 // Register a listener
